@@ -1,0 +1,1 @@
+export { Place, PlacesList } from './components';

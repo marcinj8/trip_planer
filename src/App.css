@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  background-color: rgb(109, 114, 119);
+  background-image: url('./assets/\'9af3166c.png\'');
+  min-height: 100vh;
+  padding-top: 50px;
+  color: white
 }
 
 .App-logo {

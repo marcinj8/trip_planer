@@ -1,0 +1,85 @@
+{
+    "name": "imię - string",
+    "nick": "nick - string",
+    "userId": "id użytkownika - string",
+    "phone": "789 359 899",
+    "email": "adres mailowy - string",
+    "image": "https://tmssl.akamaized.net/images/portrait/originals/38253-1540568609.jpg?lm=1540568630",
+    "trips": [
+        {
+            "tripId": "tripId",
+            "title": "moja nazwa - string - input"
+        },
+        {
+            "tripId": "tripId2",
+            "title": "moja nazwa 2 - string - input"
+        }
+    ],
+    "toVisit": [
+        {
+            "placeId": "id miejsca - generowany",
+            "description": "opis - string",
+            "creator": "userId",
+            "targetAddress": {
+                "address": "address  - string",
+                "location": {
+                    "lat": 51.2307389999999,
+                    "lng": 18.6024232
+                }
+            },
+            "image": "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        },
+        {
+            "creator": "userId",
+            "placeId": "id miejsca 2 - generowany",
+            "targetAddress": {
+                "address": "address 2 - string",
+                "location": {
+                    "lat": 51.2307389999999,
+                    "lng": 18.6024232
+                }
+            },
+            "description": "opis 2 - string",
+            "image": "https://201196-605323-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/11/white-sands-beach-in-zanzibar-960x636.jpg"
+        },
+        {
+            "creator": "userId",
+            "placeId": "id miejsca 3- generowany",
+            "targetAddress": {
+                "address": "address 3 - string",
+                "location": {
+                    "lat": 51.2307389999999,
+                    "lng": 18.6024232
+                }
+            },
+            "description": "opis 3 - string",
+            "image": null
+        }
+    ],
+    "currentTrip": "id obecnej wycieczki wycieczki - string",
+    "notifications": [
+        "powiadomienie 1"
+    ],
+    "friends": [
+        {
+            "userId": "id użytkownika - string",
+            "nick": "nick - string",
+            "image": "https://images.pexels.com/photos/4654185/pexels-photo-4654185.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+        },
+        {
+            "userId": "id użytkownika 2 - string",
+            "nick": "nick 2- string",
+            "image": "https://lh3.googleusercontent.com/proxy/BLx-6Ppil4V-uiS1ZEjSo2D6ruujMBgEsEkVNI3jCP3PdPdjOGNQZ93bi2xicdthlP4rMPXf-67tQpDUmnr7-jN1r3lZY5_FXIEDhNsP4sOTTVrYCFtdI61cizrdPmVHza6O3kg_zs1pKmcyU1nkjKA7Cx3TIJex-mfIFNqeReDg0nMAbZYD-MlSYsgN_KIG4aiag5GMiQEUaNkhVHAwaoGg1Wqg83Q"
+        },
+        {
+            "userId": "id użytkownika 5 - string",
+            "nick": "nick 5- string",
+            "image": "https://images.unsplash.com/photo-1557296387-5358ad7997bb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+        },
+        {
+            "userId": "id użytkownika 4 - string",
+            "nick": "nick 4- string",
+            "image": "https://images.unsplash.com/photo-1557296387-5358ad7997bb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+        }
+    ]
+}

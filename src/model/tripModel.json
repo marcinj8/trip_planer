@@ -1,0 +1,270 @@
+[
+    {
+        "id": "id wycieczki - string - generowany",
+        "title": "moja nazwa - string - input",
+        "description": "opis - string - input",
+        "startPoint": {
+            "address": " lokalizacja - input -> konwertowany przez google",
+            "location": {
+                "lat": 51.2307389999999,
+                "lng": 18.6024232
+            }
+        },
+        "targetAddress": {
+            "address": " Alaska, USA",
+            "location": {
+                "lat": 51.2307389999999,
+                "lng": 18.6024232
+            }
+        },
+        "costs": [
+            {
+                "amount": 100,
+                "description": "opis string - input",
+                "currency": "PLN"
+            },
+            {
+                "amount": 80,
+                "description": "opsafasfasdfsais string - input",
+                "currency": "PLN"
+            },
+            {
+                "amount": 200,
+                "description": "opis string - input",
+                "currency": "PLN"
+            },
+            {
+                "amount": 120,
+                "description": "opis string - input",
+                "currency": "PLN"
+            }
+        ],
+        "image": "https://201196-605323-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/11/white-sands-beach-in-zanzibar-960x636.jpg",
+        "totalCost": {
+            "currency": "PLN",
+            "amount": 1300
+        },
+        "budget": {
+            "amount": 1300,
+            "currency": "PLN"
+        },
+        "waypoints": [
+            {
+                "id": "waypointId-2",
+                "title": "moja nazwa  2- string",
+                "description": "opis",
+                "targetAddress": {
+                    "address": " lokalizacja - input -> konwertowany przez google",
+                    "location": {
+                        "lat": 51.2307389999999,
+                        "lng": 18.6024232
+                    }
+                },
+                "costs": [
+                    {
+                        "amount": 100,
+                        "description": "opis string",
+                        "currency": "PLN"
+                    }
+                ],
+                "totalWaypointCost": {
+                    "amount": " fo obliczenia?",
+                    "currency": "PLN"
+                },
+                "image": "https://globalgrasshopper.com/wp-content/uploads/2013/06/Huangshan-China-1000x667.jpg",
+                "order": "1"
+            },
+            {
+                "id": "waypointId-3",
+                "title": "moja nazwa 3- string",
+                "description": "opis",
+                "targetAddress": {
+                    "address": " lokalizacja - input -> konwertowany przez google",
+                    "location": {
+                        "lat": 51.2307389999999,
+                        "lng": 18.6024232
+                    }
+                },
+                "costs": [
+                    {
+                        "amount": 100,
+                        "description": "opasfsdfsfis string",
+                        "currency": "PLN"
+                    },
+                    {
+                        "amount": 180,
+                        "description": "opis string",
+                        "currency": "PLN"
+                    },
+                    {
+                        "amount": 120,
+                        "description": "opis 2 string",
+                        "currency": "PLN"
+                    }
+                ],
+                "totalWaypointCost": {
+                    "amount": " fo obliczenia?",
+                    "currency": "PLN"
+                },
+                "image": "https://201196-605323-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/11/white-sands-beach-in-zanzibar-960x636.jpg",
+                "order": "2"
+            },
+            {
+                "id": "waypointId",
+                "title": "moja nazwa - string",
+                "description": "opis",
+                "targetAddress": {
+                    "address": " lokalizacja - input -> konwertowany przez google",
+                    "location": {
+                        "lat": 51.2307389999999,
+                        "lng": 18.6024232
+                    }
+                },
+                "costs": [
+                    {
+                        "amount": 120,
+                        "description": "opis 1 string",
+                        "currency": "PLN"
+                    },
+                    {
+                        "amount": 180,
+                        "description": "opis string",
+                        "currency": "PLN"
+                    }
+                ],
+                "totalWaypointCost": {
+                    "amount": " fo obliczenia?",
+                    "currency": "PLN"
+                },
+                "image": "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                "order": "0"
+            }
+        ],
+        "creator": "id uzytkownika",
+        "shared": [
+            {
+                "userId": "id użytkownika - string",
+                "nick": "nick - string"
+            },
+            {
+                "userId": "id użytkownika 5 - string",
+                "nick": "nick 5- string"
+            }
+        ],
+        "crated": "data -new date()",
+        "lastUpdated": {
+            "userId": "id użytkownika - string",
+            "date": "data aktualizacji - new date"
+        },
+        "history": [
+            {},
+            {}
+        ],
+        "forum": {
+            "message": {
+                "user": "userId",
+                "date": "data wiadomości",
+                "content": "message content"
+            }
+        }
+    },
+    {
+        "id": "id 2 wycieczki - string - generowany",
+        "title": "moja2 nazwa - string - input",
+        "description": "opis - string - input",
+        "startPoint": {
+            "address": " lokalizacja - input -> konwertowany przez google",
+            "location": {
+                "lat": 51.2307389999999,
+                "lng": 18.6024232
+            }
+        },
+        "targetAddress": {
+            "address": " Alaska, USA",
+            "location": {
+                "lat": 51.2307389999999,
+                "lng": 18.6024232
+            }
+        },
+        "costs": [
+            {
+                "amount": 100,
+                "description": "opis string - input",
+                "currency": "PLN"
+            },
+            {
+                "amount": 80,
+                "description": "opsafasfasdfsais string - input",
+                "currency": "PLN"
+            },
+            {
+                "amount": 200,
+                "description": "opis string - input",
+                "currency": "PLN"
+            },
+            {
+                "amount": 120,
+                "description": "opis string - input",
+                "currency": "PLN"
+            }
+        ],
+        "image": "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "totalCost": {
+            "currency": "PLN"
+        },
+        "budget": {
+            "amount": 1300,
+            "currency": "PLN"
+        },
+        "waypoints": [
+            {
+                "id": "waypointId-2",
+                "title": "moja nazwa  2- string",
+                "description": "opis",
+                "targetAddress": {
+                    "address": " lokalizacja - input -> konwertowany przez google",
+                    "location": {
+                        "lat": 51.2307389999999,
+                        "lng": 18.6024232
+                    }
+                },
+                "costs": [
+                    {
+                        "amount": 100,
+                        "description": "opis string",
+                        "currency": "PLN"
+                    }
+                ],
+                "image": "https://globalgrasshopper.com/wp-content/uploads/2013/06/Huangshan-China-1000x667.jpg",
+                "order": "1"
+            }
+        ],
+        "creator": "id uzytkownika",
+        "shared": [
+            {
+                "userId": "id użytkownika - string",
+                "nick": "nick - string"
+            },
+            {
+                "userId": "id użytkownika 5 - string",
+                "nick": "nick 5- string"
+            }
+        ],
+        "crated": "data -new date()",
+        "lastUpdated": {
+            "userId": "id użytkownika - string",
+            "date": "data aktualizacji - new date"
+        },
+        "history": [
+            {},
+            {}
+        ],
+        "forum": {
+            "message": {
+                "user": "userId",
+                "date": "data",
+                "content": "message content"
+            }
+        }
+    }
+]
