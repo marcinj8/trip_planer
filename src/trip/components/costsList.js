@@ -15,21 +15,30 @@ const CostList = ({ costs, id, costListConfigStyled, showTripEditor, editMode, d
         <CostStyled
             key={id + i}
         >
-            <CostsDataStyled>
+            <CostsDataStyled editMode={editMode}>
                 <span style={{ width: '70%' }}>{cost.description}</span>
                 <span style={{ width: '15%', textAlign: 'right' }}>{cost.amount}</span>
                 <span style={{ width: '15%' }}>{cost.currency}</span>
             </CostsDataStyled>
-            <CostsButtonsStyled>
+            {editMode && <CostsButtonsStyled>
                 <Button
+                    variant='icon'
+                    icon='editButton'
                     show={editMode}
-                    clicked={() => showTripEditor([cost.description, cost.amount, cost.currency], 'koszt', [id, i, 'description', 'amount', 'currency'])}
+                    clicked={() => showTripEditor(
+                        [
+                            ['description', cost.description],
+                            ['amount', cost.amount],
+                            ['currency', cost.currency]
+                        ], 'koszt', [id, i,])}
                 >edytuj</Button>
                 <Button
+                    variant='icon'
+                    icon='deleteButton'
                     show={editMode}
                     clicked={() => deleteCost(id, i, cost.description, costs.length)}
                 >usuń</Button>
-            </CostsButtonsStyled>
+            </CostsButtonsStyled>}
         </CostStyled>
     ))
 
@@ -47,7 +56,12 @@ const CostList = ({ costs, id, costListConfigStyled, showTripEditor, editMode, d
             }
             <Button
                 show={editMode}
-                clicked={() => showTripEditor(['', 1, 'PLN'], 'koszt', [id, costs.length, 'description', 'amount', 'currency'])}
+                clicked={() => showTripEditor(
+                    [
+                        ['description', '', 'opis'],
+                        ['amount', 0, 'kwota'],
+                        ['currency', 'PLN', 'waluta']
+                    ], 'koszt', [id, costs.length,])}
             >dodaj koszt</Button>
         </CostContainerStyled>
     )

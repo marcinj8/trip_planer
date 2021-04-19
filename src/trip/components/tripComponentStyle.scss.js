@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const SmallTripCardStyled = styled.li`
+    position: relative;
     background: gray;
     border: 1px solid black;
     border-radius: 5px;
@@ -13,6 +14,8 @@ export const SmallTripCardStyled = styled.li`
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
+    box-shadow: 3px 4px 10px black;
     @media (min-width: 500px) {
         margin: 10px 15px;
     }
@@ -38,7 +41,8 @@ export const SmallTripImageStyled = styled.div`
 
 export const SmallTripInfoStyled = styled.div`
     width: 100%;
-    position: relative;
+    background: rgba(34, 49, 63, 0.8);
+    /* position: relative; */
     margin: 0 auto;
     padding: 10px 0;
     min-width: 200px;
@@ -48,7 +52,7 @@ export const SmallTripInfoStyled = styled.div`
         width: 40%;
         height: 400px;
     }
-    & div{
+    & div {
         padding: 4px 10px;
     }
     & div span {
@@ -65,14 +69,14 @@ export const SmallTripMainDataStyled = styled.div`
     text-align: left;
 `
 
-export const SmallTripTitleStyled = styled.h4`
+export const SmallTripTitleStyled = styled.h3`
     margin: 5px auto;
     padding: 0;
     text-align: center;
 `
 
 export const SmallTripButtonsStyled = styled.div`
-    position: relative;
+    /* position: relative; */
     bottom: 0;
     left: 0;
     width: 100%;
@@ -88,37 +92,6 @@ export const SmallTripButtonsStyled = styled.div`
 export const WaypoinsListStyled = styled.ul`
     width: 98%;
     margin: 20px auto 40px auto;
-`
-
-export const WaypointStyled = styled.li`
-    list-style: none;
-    margin: 20px auto;
-`
-
-export const WaypointTitleStyled = styled.h3`
-    margin: 10px auto;
-`
-
-export const WaypointDescriptionStyled = styled.div`
-    margin: 10px auto;
-`
-
-export const WaypointContentStyled = styled.div`
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-`
-
-export const WaypointImageStyled = styled.img`
-    width: 100%;
-    min-width: 250px;
-    max-height: 300px;
-    object-fit: cover;
-    @media(min-width: 700px ) {
-        width: 50%;
-        max-width: 400px;
-    };
 `
 
 export const CostContainerStyled = styled.article`
@@ -168,12 +141,14 @@ export const CostsListStyled = styled.ul`
 `
 
 export const CostStyled = styled.li`
+    position: relative;
     list-style: none;
-    margin: 5px;
-    padding: 3px;
+    margin: 0;
+    padding: 8px 2px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     transition: all .3s ease-in-out;
+    border-bottom: 1px solid black;
     & span {
         margin: 0 3px;
     };
@@ -188,10 +163,12 @@ export const CostsDataStyled = styled.span`
     display: flex;
     padding: 3px;
     align-items: center;
+    width: ${props => props.editMode ? '70%' : '100%'};
 `
 
 export const CostsButtonsStyled = styled.span`
     margin: 5px;
     padding: 3px;
+    width: 30%;
    
 `

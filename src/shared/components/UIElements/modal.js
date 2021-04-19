@@ -2,19 +2,26 @@ import React, { useRef, useEffect } from 'react';
 
 import Backdrop from './backdrop';
 import { ModalStyled, ModalHeaderStyled, ModalChildrenStyled } from './modal.scss';
-import { showModalAnimaton,closeModalAnimaton } from './uiAnimations';
+import { showModalAnimaton, closeModalAnimaton } from './uiAnimations';
 
-const Modal = ({ children, header, footer, show, close }) => {
+const Modal = ({ children, header, footer, show, close, styledConfig, styledChildrenConfig, noAnimation }) => {
 
     const modalRef = useRef(null)
 
     useEffect(() => {
-        if (show) {
-            showModalAnimaton(modalRef)
-        } else {
-            closeModalAnimaton(modalRef)
+        if (noAnimation) {
+            if (show) {
+                showModalAnimaton(modalRef, 0);
+            } else {
+                closeModalAnimaton(modalRef, 0);
+            }
         }
-    }, [show])
+        if (show) {
+            showModalAnimaton(modalRef);
+        } else {
+            closeModalAnimaton(modalRef);
+        }
+    }, [show, noAnimation])
 
     return (
         <React.Fragment>
@@ -23,14 +30,19 @@ const Modal = ({ children, header, footer, show, close }) => {
                 close={close}
             />
             <ModalStyled
+                styledConfig={styledConfig ? { ...styledConfig } : null}
                 ref={modalRef}
             >
                 {header &&
-                    <ModalHeaderStyled>
+                    <ModalHeaderStyled
+                        styledConfig={styledConfig ? { ...styledConfig } : null}
+                    >
                         {header}
                     </ModalHeaderStyled>
                 }
-                {show && <ModalChildrenStyled>
+                {show && <ModalChildrenStyled
+                    styledConfig={styledChildrenConfig ? { ...styledChildrenConfig } : null}
+                >
                     {children}
                 </ModalChildrenStyled>}
                 {

@@ -1,1 +1,1 @@
-export { NewTrip, TripList, Trip } from './pages';
+export { NewTrip, TripList, Trip, TripContainer } from './pages';

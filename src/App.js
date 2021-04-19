@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,21 +12,26 @@ import { Navigation } from './shared/components';
 import './App.css';
 import { AuthContext } from './shared/context';
 import { User } from './user';
-import { NewTrip, Trip, TripList } from './trip/pages/';
+import { NewTrip, TripList, TripLoader } from './trip/pages';
 
 function App() {
 
-  const [token, setToken] = useState('null');
-  const [userId, setUserId] = useState('userId');
+  const queryClient = new QueryClient();
+
+  const [token, setToken] = useState('login autostart');
+  const [userId, setUserId] = useState('id użytkownika - string');
+  const [currentTripId, setCurrentTripId] = useState('id wycieczki - string - generowany');
 
   const login = () => {
     setToken('token');
-    setUserId('userIdOtrzymaneZMongo');
+    setUserId('id użytkownika - string');
+    setCurrentTripId('id wycieczki - string - generowany');
   };
 
   const logout = () => {
     setToken(null);
     setUserId(null);
+    setCurrentTripId(null);
   };
 
   const authContextInitialValue = {
@@ -33,7 +39,8 @@ function App() {
     token,
     userId,
     login,
-    logout
+    logout,
+    currentTripId // do przeniesienia - userDataContext?
   }
 
   let routes = (
@@ -45,14 +52,11 @@ function App() {
               userId={userId}
             />
           </Route>
-          <Route path='/trips/current'>
-            <div>obecna wycieczka</div>
-          </Route>
           <Route path='/trips/new'>
             <NewTrip />
           </Route>
           <Route path='/:userId/trips/:tripId'>
-            <Trip />
+            <TripLoader />
           </Route>
           <Route path='/:userId/shared'>
             <div>udostępnione</div>
@@ -83,10 +87,12 @@ function App() {
   return (
     <div className="App">
       <AuthContext.Provider value={authContextInitialValue}>
+        <QueryClientProvider client={queryClient} >
           <Router>
             <Navigation />
             {routes}
           </Router>
+        </QueryClientProvider>
       </AuthContext.Provider>
     </div>
   );

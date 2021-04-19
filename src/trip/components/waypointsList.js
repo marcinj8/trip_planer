@@ -5,7 +5,7 @@ import { WaypoinsListStyled } from './tripComponentStyle.scss';
 
 const WaypointsList = ({
     waypointsList, tripCosts,
-    calculatePartialCosts, editMode, showTripEditor, deleteCost
+    calculatePartialCosts, editMode, showTripEditor, deleteCost, deleteWaypointHandler
 }) => {
 
     if (waypointsList.length === 0) {
@@ -35,6 +35,7 @@ const WaypointsList = ({
             calculatePartialCosts={calculatePartialCosts}
             showTripEditor={showTripEditor}
             deleteCost={deleteCost}
+            deleteWaypointHandler={() => deleteWaypointHandler(true, waypoint)}
         />
     ))
 

@@ -36,7 +36,7 @@ const Form = ({ inputsData, onSubmit, submitButtonName, formData }) => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        onSubmit(formState);
+        onSubmit(formState.inputs);
     };
 
     return (

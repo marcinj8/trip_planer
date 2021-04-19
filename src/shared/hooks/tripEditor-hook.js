@@ -1,136 +1,90 @@
 import { useCallback, useReducer } from 'react';
-import { makeCopy } from '../utils';
+import { makeCopy, setValue } from '../utils';
 
-const saveTripCosts = (state, value, path) => {
-    const costId = path.shift();
-    const updatedTrip = Object.assign({}, state.updatedTrip);
+const saveTripCosts = (state, updatedProperties, costId) => {
+    console.log(updatedProperties)
+    const updatedTrip = makeCopy(state.updatedTrip);
     const updatedProperty = {};
 
-    value.map((val, i) => {
-        return updatedProperty[path[i]] = val;
+    updatedProperties.map(val => {
+        return updatedProperty[val[0]] = val[1];
     })
 
     updatedTrip.costs[costId] = updatedProperty;
 
     return {
         ...state,
-        updatedTrip: updatedTrip
+        updatedTrip: updatedTrip,
+        isChangesMade: true,
     }
 };
 
-
-const saveWaypointCosts = (state, value, index, path) => {
-    const costId = path.shift();
-    const updatedTrip = Object.assign({}, state.updatedTrip);
+const saveWaypointCosts = (state, updatedProperties, waypointIndex, costId) => {
+    const updatedTrip = makeCopy(state.updatedTrip);
     const updatedProperty = {};
-    let costs = [...state.updatedTrip.waypoints[index].costs]
+    let costs = [...updatedTrip.waypoints[waypointIndex].costs]
 
-    value.map((val, i) => {
-        const value = path[i] === 'amount' ? Number(val) : val;
-        return updatedProperty[path[i]] = value;
+    updatedProperties.map(val => {
+        return updatedProperty[val[0]] = val[1];
     })
     costs[costId] = updatedProperty;
-    updatedTrip.waypoints[index].costs = [...costs];
+    updatedTrip.waypoints[waypointIndex].costs = [...costs];
 
     return {
         ...state,
-        updatedTrip: updatedTrip
+        updatedTrip: updatedTrip,
+        isChangesMade: true,
     }
 };
 
-
-// const updateProperty = (value, path) => {
-//     const updatedProperty = {};
-//     path.forEach((key, index) => {
-//         const currentPath = key.split('.');
-//         currentPath.reduce((prev, current, i) => {
-//             const setValue = Array.isArray(value) ? value[index] : value;
-//             return prev[current] = (prev[current] || i === currentPath.length - 1 ? setValue : {})
-//         }, updatedProperty)
-//     })
-//     return updatedProperty
-// }
-
-const setValue = (values, paths) => {
-    let resultObject = {};
-
-    paths.forEach((path, index) => {
-        let value = Array.isArray(values) ? values[index] : values
-        resultObject = {
-            ...resultObject,
-            ...setOneValue(resultObject, path.split('.'), value),
-        };
-    });
-
-    return resultObject;
-};
-
-const setOneValue = (source, path, value) => {
-    const [first, ...rest] = path;
-    console.log(path, first, rest)
-    if (!rest.length) {
-        return {
-            ...source,
-            [first]: value,
-        };
-    }
-
-    return {
-        ...source,
-        [first]: setOneValue(source[first] || {}, rest, value),
-    };
-};
-
-const saveTripChanges = (state, value, path) => {
-    const updatedProperty = setValue(value, path);
+const saveTripChanges = (state, updatedProperties) => {
+    const updatedProperty = setValue(updatedProperties);
     const updatedTrip = Object.assign(state.updatedTrip, updatedProperty);
 
     return {
         ...state,
-        updatedTrip: updatedTrip
+        updatedTrip: updatedTrip,
+        isChangesMade: true,
     }
 };
 
-const saveWaypointChanges = (state, value, index, path) => {
+const saveWaypointChanges = (state, updatedProperties, waypointIndex) => {
     const updatedWaypoints = makeCopy(state.updatedTrip.waypoints);
-    const waypointUpdated = updatedWaypoints[index];
-    const updatedProperty = setValue(value, path);
+    const waypointUpdated = updatedWaypoints[waypointIndex];
+    const updatedProperty = setValue(updatedProperties);
 
-    updatedWaypoints[index] = Object.assign(waypointUpdated, updatedProperty)
+    updatedWaypoints[waypointIndex] = Object.assign(waypointUpdated, updatedProperty)
 
     return {
         ...state,
         updatedTrip: {
             ...state.updatedTrip,
             waypoints: updatedWaypoints
-        }
+        },
+        isChangesMade: true,
     }
 };
 
-
 const detectPlaceOfUpdate = (state, action, isCost) => {
-    const { value, path } = action;
-    const id = path.shift();
+    const { updatedProperties, id, costId } = action;
     if (id === state.updatedTrip.id) {
         if (isCost) {
-            return saveTripCosts(state, value, path)
+            return saveTripCosts(state, updatedProperties, costId)
         } else {
-            return saveTripChanges(state, value, path);
+            return saveTripChanges(state, updatedProperties);
         }
     } else {
         const waypointIndex = state.updatedTrip.waypoints.findIndex(waypoint => waypoint.id === id);
         if (waypointIndex < 0) {
             return state
         }
-        const waypointPath = [];
-        waypointPath.push('waypoints.' + waypointIndex + '.' + path);
         if (isCost) {
-            return saveWaypointCosts(state, value, waypointIndex, path)
+            return saveWaypointCosts(state, updatedProperties, waypointIndex, costId)
         } else {
-            return saveWaypointChanges(state, value, waypointIndex, path);
+            return saveWaypointChanges(state, updatedProperties, waypointIndex);
         }
     }
-}
+};
 
 const removeTripCost = (state, costId, description, costsLength) => {
     const costs = state.updatedTrip.costs;
@@ -146,7 +100,8 @@ const removeTripCost = (state, costId, description, costsLength) => {
         updatedTrip: {
             ...state.updatedTrip,
             costs: updatedCosts
-        }
+        },
+        isChangesMade: true,
     }
 };
 
@@ -166,7 +121,8 @@ const removeWaypointCost = (state, waypointId, costId, description, costsLength)
         updatedTrip: {
             ...state.updatedTrip,
             waypoints: waypoints
-        }
+        },
+        isChangesMade: true,
     }
 }
 
@@ -184,6 +140,11 @@ const removeCost = (state, action) => {
 
 const tripReducer = (state, action) => {
     switch (action.type) {
+        case 'SET_TRIP': return {
+            ...state,
+            trip: makeCopy(action.trip),
+            updatedTrip: makeCopy(action.trip)
+        };
         case 'UPDATE_TRIP': return detectPlaceOfUpdate(state, action);
         case 'UPDATE_TRIP_COSTS': return detectPlaceOfUpdate(state, action, true);
         case 'DELETE_COST': return removeCost(state, action);
@@ -200,6 +161,35 @@ const tripReducer = (state, action) => {
             ...state,
             editMode: !state.editMode
         };
+        case 'CHANGE_DISPLAYED_TRIP': return {
+            ...state,
+            currentShow: action.tripToShow
+        };
+        case 'RESET_CHANGES': return {
+            ...state,
+            updatedTrip: makeCopy(state.trip)
+        };
+        case 'SAVE_TRIP_TOTAL_COST': return {
+            ...state,
+            updatedTrip: {
+                ...state.updatedTrip,
+                totalCost: {
+                    ...state.updatedTrip.totalCost,
+                    amount: action.totalCostAmount
+                }
+            }
+        };
+        case 'SHOW_NEW_PLACE_MODAL': return {
+            ...state,
+            newWaypoint: action.newWaypointUpdated,
+        };
+        case 'DELETE_WAYPOINT': return {
+            ...state,
+            deleteWaypoint: {
+                showDeleteModal: action.isShow,
+                waypointToDelete: action.waypointData
+            }
+        }
         default: return state;
     }
 }
@@ -207,35 +197,60 @@ const tripReducer = (state, action) => {
 export const useTripEditor = (tripData) => {
 
     const tripInitialState = {
-        trip: Object.assign({}, tripData) || {},
-        updatedTrip: Object.assign({}, tripData) || {},
+        trip: makeCopy(tripData) || null,
+        updatedTrip: makeCopy(tripData) || null,
         tripEditor: false,
         editorData: null,
         editMode: true,
+        isChangesMade: false,
+        currentShow: 'updatedTrip',
         deletePosition: {
             showModal: false,
             positionDescription: null
+        },
+        newWaypoint: {
+            isShowChoiceModal: false,
+            isShowUserPlaceModal: false,
+            isShowNewPlaceModal: false
+        },
+        deleteWaypoint: {
+            showDeleteModal: false,
+            waypointToDelete: null
         }
     }
 
     const [tripState, dispatch] = useReducer(tripReducer, tripInitialState);
 
-    const updateTrip = useCallback((value, path) => {
+    const setTrip = useCallback(trip => {
+        dispatch({
+            type: 'SET_TRIP',
+            trip
+        })
+    }, [])
+
+    const updateTrip = useCallback((updatedPropertiesArray, id) => {
         dispatch({
             type: 'UPDATE_TRIP',
-            value,
-            path
+            updatedProperties: updatedPropertiesArray,
+            id
         })
     }, []);
 
-    const updateTripCosts = useCallback((value, path) => {
+    const updateTripCosts = useCallback((updatedPropertiesArray, costId) => {
+        const updatedCosts = updatedPropertiesArray.map(property => {
+            console.log(property);
+            if (property[0] === 'amount') {
+                return [property[0], parseInt(property[1])]
+            }
+            return property;
+        })
         dispatch({
             type: 'UPDATE_TRIP_COSTS',
-            value,
-            path
+            updatedProperties: updatedCosts,
+            id: costId[0],
+            costId: costId[1]
         })
-    },
-        [],
+    }, [],
     );
 
     const deleteCost = useCallback((id, costId, description, costsLength) => {
@@ -272,6 +287,70 @@ export const useTripEditor = (tripData) => {
         })
     }, []);
 
+    const changeDisplayedTrip = useCallback(() => {
+        const tripToShow = tripState.currentShow === 'updatedTrip' ? 'trip' : 'updatedTrip';
+        dispatch({
+            type: 'CHANGE_DISPLAYED_TRIP',
+            tripToShow
+        })
+    }, [tripState.currentShow]);
 
-    return { tripState, updateTrip, updateTripCosts, deleteCost, toggleTripEditor, toggleDeleteCostModal, toggleEditMode }
-}
+    const resetChanges = useCallback(() => {
+        dispatch({
+            type: 'RESET_CHANGES',
+        })
+    }, []);
+
+    const saveTripTotalCost = useCallback((totalCostAmount) => {
+        dispatch({
+            type: 'SAVE_TRIP_TOTAL_COST',
+            totalCostAmount
+        })
+    }, []);
+
+    const newPlaceModalHandler = useCallback((isShow, choosenMethod) => {
+        const newWaypointUpdated = choosenMethod
+            ? (
+                {
+                    isShowChoiceModal: isShow,
+                    isShowUserPlaceModal: choosenMethod === 'exist',
+                    isShowNewPlaceModal: choosenMethod === 'new'
+                }
+            )
+            : (
+                {
+                    isShowChoiceModal: isShow,
+                    isShowUserPlaceModal: false,
+                    isShowNewPlaceModal: false
+                }
+            )
+        dispatch({
+            type: 'SHOW_NEW_PLACE_MODAL',
+            newWaypointUpdated
+        })
+    }, [])
+
+    const deleteWaypointHandler = (isShow, waypointData) => {
+        return dispatch({
+            type: 'DELETE_WAYPOINT',
+            isShow,
+            waypointData: waypointData || null
+        })
+    }
+
+    return {
+        tripState,
+        setTrip,
+        updateTrip,
+        updateTripCosts,
+        deleteCost,
+        toggleTripEditor,
+        toggleDeleteCostModal,
+        toggleEditMode,
+        changeDisplayedTrip,
+        resetChanges,
+        saveTripTotalCost,
+        newPlaceModalHandler,
+        deleteWaypointHandler
+    }
+};

@@ -28,7 +28,7 @@ export const NEW_TRIP_INPUT_DATA = [
     {
         variant:'secondary',
         label:'adres wycieczki',
-        inputId:'address',
+        inputId:'targetAddress',
         type:'text',
         errorMessage:'wpisz adres',
         validators:[VALIDATOR_REQUIRE()]

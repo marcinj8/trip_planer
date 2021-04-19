@@ -210,7 +210,8 @@
         ],
         "image": "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         "totalCost": {
-            "currency": "PLN"
+            "currency": "PLN",
+            "amount": 600
         },
         "budget": {
             "amount": 1300,

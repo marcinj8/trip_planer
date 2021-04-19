@@ -1,11 +1,13 @@
 import React, { useMemo, useReducer, useEffect } from 'react';
 
+import { validate } from './validators';
+
 import {
     PrimaryInputSytled,
     SecondaryInputSytled,
-    TextareaSytled
+    TextareaSytled,
+    InputContainerStyled
 } from './input.scss';
-import { validate } from './validators';
 
 const InputReducer = (state, action) => {
     switch (action.type) {
@@ -62,7 +64,7 @@ const Input = ({ variant, type, label, placeholder, inputId, initialValue, initi
     }, [inputId, inputState.value, inputState.isValid, onInput])
 
     return (
-        <div>
+        <InputContainerStyled>
             <label
                 htmlFor={inputId}
             >{label}</label>
@@ -78,7 +80,7 @@ const Input = ({ variant, type, label, placeholder, inputId, initialValue, initi
             {!inputState.isValid && inputState.isTouched && (
                 <h5>{errorMessage}</h5>
             )}
-        </div>
+        </InputContainerStyled>
     )
 }
 

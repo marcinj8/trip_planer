@@ -10,11 +10,20 @@ export const UserStyled = styled.section`
     flex-wrap: wrap;
 `
 
-export const UserSectionStyled = styled.article`
-    margin: 0 auto;
-    width: 45%;
-    min-width: 350px;
-    /* border: 1px solid black; */
+export const UserDataSectionStyled = styled.article`
+    margin: 0 ;
+    border-right: none;
+    padding: 10px 15px;
+    width: 330px;
+    @media(min-width: 730px) {
+        border-right: 1px solid black;
+    }
+`
+
+export const UserPlaceSectionStyled = styled.article`
+    margin: 0;
     padding: 10px 5px;
-    min-width: 300px;
+    min-width: 350px;
+    width: calc(100% - 350px);
+    /* width: 75%; */
 `

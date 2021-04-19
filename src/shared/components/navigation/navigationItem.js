@@ -8,7 +8,7 @@ const NavigationItem = ({ children, link, id, clicked }) => {
 
     if (!link) {
         return (
-            <NavigationItemStyled style={{padding: '15px'}}
+            <NavigationItemStyled style={{padding: '16px'}}
                 onClick={clicked}
                 key={id}
             >

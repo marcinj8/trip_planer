@@ -8,12 +8,12 @@ import { NavigationListStyled, BorderLineStyled } from './navigation.scss';
 const NavigationList = ({ styledConfig, closeSidebar }) => {
 
     const { isLoggedIn, userId, login, logout } = useContext(AuthContext);
-
+    // const currentTripId = 'id 2 wycieczki - string - generowany';
+    
     return (
         <NavigationListStyled styledConfig={styledConfig}>
             {isLoggedIn && <NavigationItem link={`/user`} id='userData' >użytkownik</NavigationItem>}
-            {isLoggedIn && <NavigationItem link='/trips/current' id='currentTrip' >obecna wycieczka</NavigationItem>}
-            {/* <NavigationItem dropDown >wycieczki</NavigationItem> */}
+            {/* {isLoggedIn && <NavigationItem link={`/${userId}/trips/${currentTripId}`} id='currentTrip' >obecna wycieczka</NavigationItem>} */}
             {isLoggedIn && <NavigationItem link='/trips/new' id='addTrip' >dodaj</NavigationItem>}
             {isLoggedIn && <NavigationItem exact link={`/${userId}/trips`} id='trips' >moje wycieczki</NavigationItem>}
             {isLoggedIn && <NavigationItem exact link={`/${userId}/shared`} id='sharedTrips' >udostępnione</NavigationItem>}

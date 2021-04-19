@@ -10,9 +10,10 @@ export const ModalStyled = styled.div`
     z-index:1000;
     border-radius: 8px;
     min-width: 300px;
-    max-width: 500px;
-    width: 300px;
-    padding: 0 0 10px 0;
+    max-height: 80vh;
+    max-width: ${props => props.styledConfig && props.styledConfig.width ? props.styledConfig.width : '500px'};
+    width: ${props => props.styledConfig && props.styledConfig.width ? props.styledConfig.width : '300px'};
+    padding: 0 0 10px 0 !important;
     overflow: hidden;
     box-shadow: 12px 9px 10px 5px #000000;
     opacity: 0;
@@ -22,15 +23,17 @@ export const ModalStyled = styled.div`
 `
 
 export const ModalHeaderStyled = styled.h2`
+    font-size: ${ props => props.styledConfig && props.styledConfig.titleFontSize ? props.styledConfig.titleFontSize : 'auto'};
+    color: white;
     border-bottom: 1px solid white;
     background-color: rgba(46, 49, 49, 1);
     width: 100%;
     height: 65px;
-    padding: 18px;
+    line-height: 65px;
 `
 
 export const ModalChildrenStyled = styled.div`
     width: 100%;
     min-height: 60px;
-    padding: 20px;
+    padding: ${props => props.styledConfig && props.styledConfig.padding ? props.styledConfig.padding : '20px'} !important;
 `

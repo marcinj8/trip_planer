@@ -13,55 +13,29 @@ export const TripListStyled = styled.ul`
     }
 `
 
-export const TripStyled = styled.div`
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
- 
-`
-
-export const TripImageStyled = styled.img`
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-`
-
-export const TripTitleStyled = styled.h2`
-    position: absolute;
-    top: 80px;
-    margin: 0 auto;
-    text-shadow: 0 0 5px black;
-    font-size: 1.6rem;
-    left: 50%;
-    width: auto;
-    transform: translateX(-50%);
-    @media(min-width: 400px) {
-        top: 120px;
-    }
-`
-
-export const TripDataStyled = styled.div`
+export const NewTripStyled = styled.article`
     width: 95%;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    justify-content: center;
-    @media(min-width: 400px) {
-        width: 90%;
-
-    }
-    & div{
-        padding: 10px
+    margin: 30px auto 0 auto;
+    padding: 25px 5px;
+    max-width: 600px;
+    background: rgba(34, 49, 63, 0.6);
+    background: rgba(58, 83, 155, 1);
+    border-radius: 5px;
+    border: 1px solid white;
+    box-shadow: 5px 5px 15px 5px #000000;
+    color: white;
+    @media(min-width: 600px) {
+        width: 50%;
     }
 `
 
-export const TripWayPointsStyled = styled.div`
-    width: 95%;
-    display: flex;
-    margin: 0 auto;
-    flex-direction: column;
-    justify-content: center;
-    @media(min-width: 400px) {
-        width: 90%;
+export const NewTripHeaderStyled = styled.h2`
+    margin: 10px auto;
+    @media(min-width: 600px) {
+        margin: 20px auto;
     }
+`
+
+export const TipListHeaderStyled = styled.h2`
+    margin: 25px auto 20px auto;
 `

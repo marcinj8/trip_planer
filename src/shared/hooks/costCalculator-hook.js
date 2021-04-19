@@ -1,4 +1,5 @@
 import { useCallback, useReducer } from 'react';
+import { makeCopy } from '../utils';
 
 const cummulateCost = (state, action) => {
     let totalCostUpdated = 0;
@@ -35,8 +36,8 @@ const costReducer = (state, action) => {
 export const useCostCalculator = (totalCost) => {
 
     const initialState = {
-        totalCost: Object.assign({}, totalCost) || { amount: 0, currency: 'PLN' },
-        partialCost: {}
+        totalCost: makeCopy(totalCost) || { amount: 0, currency: 'PLN' },
+        partialCost: null
     }
     const [costState, dispatch] = useReducer(costReducer, initialState);
 

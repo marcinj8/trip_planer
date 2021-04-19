@@ -17,9 +17,11 @@
     ],
     "toVisit": [
         {
-            "placeId": "id miejsca - generowany",
+            "id": "id miejsca - generowany",
+            "title": "moja nazwa - string",
             "description": "opis - string",
             "creator": "userId",
+            "costs": [],
             "targetAddress": {
                 "address": "address  - string",
                 "location": {
@@ -30,8 +32,11 @@
             "image": "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
         },
         {
+            "id": "id miejsca 2 - generowany",
+            "title": "moja nazwa  2- string",
             "creator": "userId",
-            "placeId": "id miejsca 2 - generowany",
+            "description": "opis 2 - string",
+            "costs": [],
             "targetAddress": {
                 "address": "address 2 - string",
                 "location": {
@@ -39,12 +44,13 @@
                     "lng": 18.6024232
                 }
             },
-            "description": "opis 2 - string",
             "image": "https://201196-605323-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/11/white-sands-beach-in-zanzibar-960x636.jpg"
         },
         {
+            "id": "id miejsca 3- generowany",
+            "title": "moja nazwa  3- string",
             "creator": "userId",
-            "placeId": "id miejsca 3- generowany",
+            "costs": [],
             "targetAddress": {
                 "address": "address 3 - string",
                 "location": {
@@ -69,7 +75,7 @@
         {
             "userId": "id użytkownika 2 - string",
             "nick": "nick 2- string",
-            "image": "https://lh3.googleusercontent.com/proxy/BLx-6Ppil4V-uiS1ZEjSo2D6ruujMBgEsEkVNI3jCP3PdPdjOGNQZ93bi2xicdthlP4rMPXf-67tQpDUmnr7-jN1r3lZY5_FXIEDhNsP4sOTTVrYCFtdI61cizrdPmVHza6O3kg_zs1pKmcyU1nkjKA7Cx3TIJex-mfIFNqeReDg0nMAbZYD-MlSYsgN_KIG4aiag5GMiQEUaNkhVHAwaoGg1Wqg83Q"
+            "image": "https://images.pexels.com/photos/4654185/pexels-photo-4654185.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
         },
         {
             "userId": "id użytkownika 5 - string",

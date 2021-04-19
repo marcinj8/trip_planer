@@ -20,8 +20,8 @@ export const NavigationStyled = styled.nav`
     left: 0;
     width: 100%;
     height: 50px;
-    background: rgb(131,58,180);
-    background: linear-gradient(180deg, rgba(131,58,180,0.7287289915966386) 0%, rgba(253,29,29,0.7147233893557423) 50%, rgba(252,176,69,0.711922268907563) 100%);
+    box-shadow: 3px 0 5px black;
+    background: rgba(58, 83, 155, 1);
 `
 
 export const SideBarStyled = styled.nav`
@@ -34,8 +34,7 @@ export const SideBarStyled = styled.nav`
     min-width: 200px;
     max-width: 300px;
     height: 100%;
-    background: rgb(131,58,180);
-    background: linear-gradient(180deg, rgba(131,58,180,0.9287289915966386) 0%, rgba(253,29,29,0.9147233893557423) 50%, rgba(252,176,69,0.911922268907563) 100%);
+    background: rgba(58, 83, 155, 1);
     transform: translateX(-100%);
     opacity: 0;
 `
@@ -76,11 +75,15 @@ export const NavigationItemStyled = styled.li`
     cursor: pointer;
     color: white;
     &:hover {
-            color: gold;   
+            color: white;  
+            background-color: rgba(140, 20, 252, 1);
+            background-color: red;
+            box-shadow: inset 0px 0px 16px 9px rgba(0,0,0,0.69);
         };
     & a {
         display: block;
-        padding: 15px   ;
+        height: 100%;
+        padding: 16px;
         color: white;
         text-decoration: none;
         &:visited {
@@ -94,7 +97,9 @@ export const NavigationItemStyled = styled.li`
             text-decoration: underline;
         };
         &:hover {
-            color: gold;   
+            color: white;  
+            background-color: rgba(140, 20, 252, 1);
+            box-shadow: inset 0px 0px 16px 3px rgba(0,0,0,0.69);
         };
     }
 `

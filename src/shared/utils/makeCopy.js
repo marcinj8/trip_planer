@@ -1,5 +1,6 @@
 const copyArr = arr => {
-    return arr.map(item => makeCopy(item));
+    const newArr = [];
+    return arr.map((item, i) => newArr[i] = makeCopy(item));
 };
 
 const copyObj = obj => {
@@ -9,15 +10,15 @@ const copyObj = obj => {
         if (obj.hasOwnProperty(key)) {
             newObj[key] = makeCopy(obj[key]);
         }
-        return newObj;
     }
+    return newObj;
 };
 
-export const makeCopy = object => {
-    if (Array.isArray(object)) {
-        return copyArr(object);
-    } else if (typeof object === 'object') {
-        copyObj(object);
+export const makeCopy = item => {
+    if (Array.isArray(item)) {
+        return copyArr(item);
+    } else if (typeof item === 'object') {
+        return copyObj(item);
     }
-    return object;
+    return item;
 };
