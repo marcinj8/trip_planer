@@ -19,12 +19,12 @@ function App() {
   const queryClient = new QueryClient();
 
   const [token, setToken] = useState('login autostart');
-  const [userId, setUserId] = useState('id użytkownika - string');
+  const [userId, setUserId] = useState('48641184946');
   const [currentTripId, setCurrentTripId] = useState('id wycieczki - string - generowany');
 
   const login = () => {
     setToken('token');
-    setUserId('id użytkownika - string');
+    setUserId('48641184946');
     setCurrentTripId('id wycieczki - string - generowany');
   };
 

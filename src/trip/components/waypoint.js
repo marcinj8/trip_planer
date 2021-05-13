@@ -106,7 +106,7 @@ const Waypoint = ({
             </WaypointStyled >
             <Modal
                 styledChildrenConfig={{ padding: '0px' }}
-                styledConfig={{ width: '90%', height: '80vh', titleFontSize: '1rem'}}
+                styledConfig={{ width: '90%', height: '80vh', titleFontSize: '1rem' }}
                 header={targetAddress.address}
                 footer={<Button clicked={hideMapHandler}>zamknij</Button>}
                 show={showMap}

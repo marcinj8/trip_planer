@@ -28,10 +28,12 @@ const LoadingSuspense = (props) => {
                 </h4>
             </div>
         );
-
+    if (!show) {
+        return null
+    }
+    
     return (
         <Modal
-            noAnimation
             show={show}
             header={
                 isError

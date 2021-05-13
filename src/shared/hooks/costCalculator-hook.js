@@ -1,24 +1,28 @@
 import { useCallback, useReducer } from 'react';
 import { makeCopy } from '../utils';
 
-const cummulateCost = (state, action) => {
+const calculateTotalCost = partialCosts => {
     let totalCostUpdated = 0;
-    const partialCost = { ...state.partialCost };
+    const partialCostKeys = Object.keys(partialCosts);
+    partialCostKeys.forEach(key => {
+        // console.log(partialCosts[key].amount, key, totalCostUpdated)
+        totalCostUpdated = +totalCostUpdated + partialCosts[key].amount
+    });
+    return totalCostUpdated;
+}
 
-    partialCost[action.id] = {};
-    partialCost[action.id].amount = +action.amount;
-    const partialCostKeys = Object.keys(partialCost);
-    partialCostKeys.forEach(key => totalCostUpdated = +totalCostUpdated + partialCost[key].amount);
+const cummulateCost = (state, action) => {
+    const partialCostUpdated = makeCopy(state.partialCost);
+    partialCostUpdated[action.id] = {
+        amount: +action.amount,
+        currency: 'PLN'
+    }
+
+    const totalCostUpdated = calculateTotalCost(partialCostUpdated);
 
     return {
         ...state,
-        partialCost: {
-            ...state.partialCost,
-            [action.id]: {
-                amount: Number(action.amount),
-                currency: 'PLN'
-            },
-        },
+        partialCost: partialCostUpdated,
         totalCost: {
             ...state.totalCost,
             amount: Number(totalCostUpdated),
@@ -26,9 +30,25 @@ const cummulateCost = (state, action) => {
     }
 };
 
+const deleteWaypointCost = (state, id) => {
+    const partialCostUpdated = makeCopy(state.partialCost);
+    const totalCostUpdated = makeCopy(state.totalCost);
+    totalCostUpdated.amount = totalCostUpdated.amount - partialCostUpdated[id].amount;
+
+    console.log(partialCostUpdated[id])
+    delete partialCostUpdated[id];
+
+    return {
+        ...state,
+        partialCost: partialCostUpdated,
+        totalCost: totalCostUpdated
+    }
+}
+
 const costReducer = (state, action) => {
     switch (action.type) {
         case 'CALCULATE_PARTIAL_COSTS': return cummulateCost(state, action);
+        case 'REMOVE_WAYPOINT_COSTS': return deleteWaypointCost(state, action.waypointId);
         default: return state;
     }
 }
@@ -51,7 +71,14 @@ export const useCostCalculator = (totalCost) => {
             amount: costs,
             id
         })
+    }, []);
+
+    const removeWaypointCosts = useCallback(waypointId => {
+        return dispatch({
+            type: 'REMOVE_WAYPOINT_COSTS',
+            waypointId
+        })
     }, [])
 
-    return { costState, calculatePartialCosts }
+    return { costState, calculatePartialCosts, removeWaypointCosts }
 }

@@ -41,6 +41,7 @@ const PlacesList = ({ userId, places, title, noPlacesMessage, updateUser }) => {
             description={place.description}
             location={place.location}
             image={place.image}
+            animationDelay={index}
             deletePlace={() => onDeletePlaceHandler(place)}
         />
     ));

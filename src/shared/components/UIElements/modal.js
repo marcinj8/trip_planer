@@ -1,27 +1,19 @@
 import React, { useRef, useEffect } from 'react';
 
 import Backdrop from './backdrop';
-import { ModalStyled, ModalHeaderStyled, ModalChildrenStyled } from './modal.scss';
+import { ModalStyled, ModalHeaderStyled, ModalChildrenStyled, ModalFooterStyled } from './modal.scss';
 import { showModalAnimaton, closeModalAnimaton } from './uiAnimations';
 
-const Modal = ({ children, header, footer, show, close, styledConfig, styledChildrenConfig, noAnimation }) => {
+const Modal = ({ children, header, footer, show, close, styledConfig, styledChildrenConfig }) => {
 
     const modalRef = useRef(null)
-
     useEffect(() => {
-        if (noAnimation) {
-            if (show) {
-                showModalAnimaton(modalRef, 0);
-            } else {
-                closeModalAnimaton(modalRef, 0);
-            }
-        }
         if (show) {
             showModalAnimaton(modalRef);
         } else {
             closeModalAnimaton(modalRef);
         }
-    }, [show, noAnimation])
+    }, [show]);
 
     return (
         <React.Fragment>
@@ -33,22 +25,25 @@ const Modal = ({ children, header, footer, show, close, styledConfig, styledChil
                 styledConfig={styledConfig ? { ...styledConfig } : null}
                 ref={modalRef}
             >
-                {header &&
+                {
+                    header &&
                     <ModalHeaderStyled
                         styledConfig={styledConfig ? { ...styledConfig } : null}
                     >
                         {header}
                     </ModalHeaderStyled>
                 }
-                {show && <ModalChildrenStyled
-                    styledConfig={styledChildrenConfig ? { ...styledChildrenConfig } : null}
-                >
-                    {children}
-                </ModalChildrenStyled>}
                 {
-                    footer && <footer>
+                    show && <ModalChildrenStyled
+                        styledConfig={styledChildrenConfig ? { ...styledChildrenConfig } : null}
+                    >
+                        {children}
+                    </ModalChildrenStyled>
+                }
+                {
+                    footer && <ModalFooterStyled>
                         {footer}
-                    </footer>
+                    </ModalFooterStyled>
                 }
             </ModalStyled>
         </React.Fragment>

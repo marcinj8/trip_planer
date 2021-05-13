@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Modal } from '../../shared/components';
 import GoogleMap from '../../shared/components/maps/googleMap';
 import { formatedCurrency } from '../../shared/utils';
+import { showItem } from '../animations';
 
 import {
     SmallTripCardStyled,
@@ -14,10 +15,11 @@ import {
 } from './tripComponentStyle.scss';
 
 const SmallTripCard = (props) => {
-    const { tripId, title, description, totalCost, budget, targetAddress, waypoints, image, deleteTrip } = props;
-
+    const { tripId, title, description, totalCost, budget, targetAddress, waypoints, image, animationDelay, deleteTrip } = props;
     const { userId } = useParams();
-    
+
+    const smallTripRef = useRef(null);
+
     const [showMap, setShowMap] = useState(false)
     const [isHover, setIsHover] = useState(false)
 
@@ -35,9 +37,14 @@ const SmallTripCard = (props) => {
         setIsHover(false)
     };
 
+    useEffect(() => {
+        showItem(smallTripRef, animationDelay);
+    }, [animationDelay])
+
     return (
         <React.Fragment>
             <SmallTripCardStyled
+                ref={smallTripRef}
                 onMouseEnter={showDeleButton}
                 onMouseLeave={hideDeleButton}
             >

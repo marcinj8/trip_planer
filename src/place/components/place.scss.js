@@ -28,6 +28,8 @@ export const PlaceStyled = styled.li`
     overflow: hidden;
     list-style: none;
     border-radius: 8px;
+    transform: translateY(-100px);
+    opacity: 0;
     box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 `
 

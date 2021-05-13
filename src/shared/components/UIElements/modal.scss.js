@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ModalStyled = styled.div`
+    box-sizing: border-box;
     position: fixed;
     top: 10%;
     left: 50%;
@@ -13,7 +14,7 @@ export const ModalStyled = styled.div`
     max-height: 80vh;
     max-width: ${props => props.styledConfig && props.styledConfig.width ? props.styledConfig.width : '500px'};
     width: ${props => props.styledConfig && props.styledConfig.width ? props.styledConfig.width : '300px'};
-    padding: 0 0 10px 0 !important;
+    padding: 0 !important;
     overflow: hidden;
     box-shadow: 12px 9px 10px 5px #000000;
     opacity: 0;
@@ -36,4 +37,9 @@ export const ModalChildrenStyled = styled.div`
     width: 100%;
     min-height: 60px;
     padding: ${props => props.styledConfig && props.styledConfig.padding ? props.styledConfig.padding : '20px'} !important;
+`
+
+export const ModalFooterStyled = styled.div`
+    width: 100%;
+    padding: ${props => props.styledConfig && props.styledConfig.padding ? props.styledConfig.padding : '10px'} !important;
 `

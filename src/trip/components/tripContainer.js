@@ -24,7 +24,6 @@ const TripContainer = ({
         hoverBg: 'silver'
     };
 
-    console.log(tripState.isChangesMade, tripState.editMode)
     return (
         <TripContainerStyled>
             <TripTitleStyled>{displayedTrip.title}</TripTitleStyled>

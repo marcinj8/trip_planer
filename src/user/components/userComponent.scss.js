@@ -62,6 +62,7 @@ export const UserNameStyled = styled.span`
     width: 50%;
     min-width: 8.5rem;
     height: 100%;
+    word-wrap: break-word;
     display: flex; 
     justify-content: left;
     align-items: ${props => (!!props.styleConfig && props.styleConfig.alignItem) ? props.styleConfig.alignItem : 'center'};;

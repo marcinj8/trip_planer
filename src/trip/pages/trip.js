@@ -14,7 +14,7 @@ import { ChooseWaypoint } from '../components';
 import TripContainer from '../components/tripContainer';
 import LoadingSuspense from '../../shared/components/UIElements/loadingSuspense';
 
-const Trip = ({ trip, userId, tripId }) => {
+const Trip = ({ trip, userId, tripId, saveTripChanges }) => {
     const history = useHistory();
 
     const [error, setError] = useState(false);
@@ -22,7 +22,12 @@ const Trip = ({ trip, userId, tripId }) => {
 
     const user = USER_MODEL;
 
-    const { costState, calculatePartialCosts } = useCostCalculator();
+    const {
+        costState,
+        calculatePartialCosts,
+        removeWaypointCosts
+    } = useCostCalculator();
+
     const {
         tripState,
         updateTrip,
@@ -48,10 +53,10 @@ const Trip = ({ trip, userId, tripId }) => {
         const propertyPath = [];
 
         propertiesArr.forEach((val, i) => {
-            // formData[i] = {
-            //     value: propertiesArr[i][1],
-            //     isValid: val[1] ? true : false
-            // };
+            formData[i] = {
+                value: propertiesArr[i][1],
+                isValid: val[1] ? true : false
+            };
             inputsData[i] = {
                 variant: 'secondary',
                 label: val[2] ? val[2] : '',
@@ -107,9 +112,10 @@ const Trip = ({ trip, userId, tripId }) => {
     };
 
     const onRemoveWaypointHandler = () => {
+        const deletedWaypointId = tripState.deleteWaypoint.waypointToDelete.id;
         const waypointsList = makeCopy(displayedTrip.waypoints);
-        const waypointsListUpdated = waypointsList.filter(waypoint => waypoint.id !== tripState.deleteWaypoint.waypointToDelete.id)
-
+        const waypointsListUpdated = waypointsList.filter(waypoint => waypoint.id !== deletedWaypointId)
+        removeWaypointCosts(deletedWaypointId);
         updateTrip([['waypoints', waypointsListUpdated]], displayedTrip.id);
         deleteWaypointHandler(false);
     }
@@ -118,9 +124,10 @@ const Trip = ({ trip, userId, tripId }) => {
         setError(false);
         setLoading(true);
         const updatedTrip = tripState.updatedTrip;
-        axios.patch(`http://localhost:5000/trips/${tripId}`, { updatedTrip })
+        axios.patch(`${process.env.REACT_APP_BACKEND_URL}/trips/${tripId}`, { updatedTrip })
             .then(res => {
                 setLoading(false);
+                saveTripChanges(updatedTrip);
                 history.push(`/${userId}/trips`);
             })
             .catch(err => {

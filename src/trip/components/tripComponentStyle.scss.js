@@ -16,6 +16,8 @@ export const SmallTripCardStyled = styled.li`
     flex-wrap: wrap;
     justify-content: space-around;
     box-shadow: 3px 4px 10px black;
+    transform: translateY(-100px);
+    opacity: 0;
     @media (min-width: 500px) {
         margin: 10px 15px;
     }

@@ -19,8 +19,8 @@ const NewTrip = () => {
     const [loading, setLoading] = useState(false);
 
     const addTripHandler = (formState) => {
-        setLoading(true);
         setError(false);
+        setLoading(true);
         const newTrip = makeCopy(newTripModel);
         const createBudgetProperty = (amount, property) => {
             return newTrip[property] = {
@@ -49,12 +49,13 @@ const NewTrip = () => {
             date: new Date().getTime()
 
         }
-        axios.post('http://localhost:5000/trips/add-trip', { newTrip })
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/trips/add-trip`, { newTrip })
             .then(res => {
                 setLoading(false);
                 history.push(`/${userId}/trips`);
             })
             .catch(err => {
+                console.log(err.message)
                 setLoading(false);
                 setError(true);
             })

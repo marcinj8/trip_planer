@@ -1,0 +1,1 @@
+export { showItem } from './tripAnimations';

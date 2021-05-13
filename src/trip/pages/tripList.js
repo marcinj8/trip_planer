@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
@@ -12,10 +12,12 @@ const TripList = () => {
     const [errorModal, setErrorModal] = useState(false);
     const [tripList, setTripList] = useState(null);
 
-    const createTripsList = list => {
+    const tripListRef = useRef(null);
+
+    const createTripsList = useCallback((list, deleteTripFunc) => {
         const tripsArr = [];
 
-        list.map(trip => tripsArr.push(
+        list.map((trip, index) => tripsArr.push(
             <SmallTripCard
                 key={trip.id}
                 tripId={trip.id}
@@ -26,15 +28,16 @@ const TripList = () => {
                 targetAddress={trip.targetAddress}
                 waypoints={trip.waypoints}
                 image={trip.image}
-                deleteTrip={deleteTripHandler}
+                animationDelay={index}
+                deleteTrip={deleteTripFunc}
             />
         ))
 
         setTripList(tripsArr);
-    }
+    }, [])
 
     const getData = async () => {
-        return await axios.get('http://localhost:5000/trips/')
+        return await axios.get(`${process.env.REACT_APP_BACKEND_URL}/trips/`)
     };
     const { data, isLoading, isError, error } = useQuery('tripsList', getData);
 
@@ -44,20 +47,20 @@ const TripList = () => {
         axios.delete(`http://localhost:5000/trips/${id}`)
             .then(res => {
                 console.log(res.data)
-                createTripsList(res.data.tripsList);
+                createTripsList(res.data.tripsList, deleteTripHandler);
                 setLoading(false);
             })
             .catch(err => {
                 setLoading(false);
                 setErrorModal(true);
             })
-    }, []);
+    }, [createTripsList]);
 
     useEffect(() => {
         if (!isLoading && !isError) {
-            createTripsList(data.data.tripsList)
+            createTripsList(data.data.tripsList, deleteTripHandler)
         }
-    }, [data, isLoading, isError, deleteTripHandler])
+    }, [data, isLoading, isError, deleteTripHandler, createTripsList])
 
     useEffect(() => {
         if (isError) {
@@ -68,6 +71,11 @@ const TripList = () => {
     useEffect(() => {
         setLoading(isLoading)
     }, [isLoading]);
+
+    // useEffect(() => {
+    //     console.log(tripListRef.current)
+    //     showItem(tripListRef);
+    // })
 
     return (
         <div>
@@ -88,7 +96,9 @@ const TripList = () => {
                     : (
                         <React.Fragment>
                             <TipListHeaderStyled>Lista zaplanowanych wycieczek</TipListHeaderStyled>
-                            <TripListStyled >
+                            <TripListStyled
+                                ref={tripListRef}
+                            >
                                 {tripList}
                             </TripListStyled>
                         </React.Fragment>
